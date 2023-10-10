@@ -6,7 +6,7 @@ import { getClientConfig } from "./config/client";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: KreohGPT",
+  title: "KreohGPT",
   description: "Your personal GPT Chat Bot.",
   viewport: {
     width: "device-width",
