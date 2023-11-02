@@ -1268,7 +1268,6 @@ function _Chat() {
             onInput={(e) => onInput(e.currentTarget.value)}
             value={userInput}
             onKeyDown={onInputKeyDown}
-            onFocus={scrollToBottom}
             onClick={scrollToBottom}
             rows={inputRows}
             autoFocus={autoFocus}
