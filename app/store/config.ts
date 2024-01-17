@@ -39,7 +39,7 @@ export const DEFAULT_CONFIG = {
 
   disablePromptHint: false,
 
-  dontShowMaskSplashScreen: false, // dont show splash screen when create chat
+  dontShowMaskSplashScreen: true, // dont show splash screen when create chat
   hideBuiltinMasks: false, // dont add builtin masks
 
   customModels: "",
@@ -55,7 +55,7 @@ export const DEFAULT_CONFIG = {
     sendMemory: true,
     historyMessageCount: 5,
     compressMessageLengthThreshold: 1000,
-    enableInjectSystemPrompts: true,
+    enableInjectSystemPrompts: false,
     template: DEFAULT_INPUT_TEMPLATE,
   },
 };
