@@ -267,6 +267,13 @@ export const useChatStore = createPersistStore(
         );
       },
 
+      deleteSessions() {
+        set(() => ({
+          sessions: [createEmptySession()],
+          currentSessionIndex: 0,
+        }));
+      },
+
       currentSession() {
         let index = get().currentSessionIndex;
         const sessions = get().sessions;

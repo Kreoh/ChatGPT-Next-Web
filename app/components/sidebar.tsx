@@ -214,9 +214,15 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-              <IconButton icon={<GithubIcon />} shadow />
-            </a>
+            <IconButton
+              icon={<DeleteIcon />}
+              onClick={async () => {
+                if (await showConfirm(Locale.Home.DeleteChat)) {
+                  chatStore.deleteSessions();
+                }
+              }}
+              shadow
+            />
           </div>
         </div>
         <div>
