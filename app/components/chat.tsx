@@ -386,25 +386,41 @@ function useScrollToBottom() {
   // for auto-scroll
   const scrollRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
+  const userHasScrolledUp = useRef(false);
+
+  function onScroll() {
+    if (!scrollRef.current) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+
+    // If the user has scrolled up, remember this state
+    userHasScrolledUp.current = !isAtBottom;
+  }
 
   function scrollDomToBottom() {
     const dom = scrollRef.current;
-    if (dom) {
-      // Improve Use smooth scrolling behavior
-      dom.scrollTo({ top: dom.scrollHeight, behavior: "smooth" });
+    if (dom && !userHasScrolledUp.current) {
+      // Scroll to the bottom without smooth behavior to ensure immediate update
+      // Smooth scrolling appears to break this
+      dom.scrollTop = dom.scrollHeight;
     }
   }
 
   // auto scroll
   useEffect(() => {
-    if (autoScroll) {
-      scrollDomToBottom();
-    }
+    const dom = scrollRef.current;
+    dom?.addEventListener("scroll", onScroll);
+
+    scrollDomToBottom();
+
+    return () => {
+      dom?.removeEventListener("scroll", onScroll);
+    };
   });
 
   return {
     scrollRef,
-    autoScroll,
     setAutoScroll,
     scrollDomToBottom,
   };
